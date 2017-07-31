@@ -2,15 +2,24 @@ var count;
 
 function setup() {
     createCanvas(600, 400);
-    background(51);
     count = 1;
 }
+
 function draw() {
-    console.log(toRadians(count));
+    background(101);
     noFill();
-    arc(300, 200, 80, 80, 0, toRadians(count));
+    // add .001 to fix drawing arc from PI to PI
+    end = map(sin(toRadians(count)), -1, 1, 0, TWO_PI);
+    if (end<PI) {
+        console.log('hello');
+        arc(300, 200, 80, 80, end, PI);
+    } else if (end > PI) {
+        arc(300, 200, 80, 80, PI, end);
+    }
+    else {
+        console.log('why');
+    }
     count++;
-    console.log(count);
 }
 
 function toRadians(degrees) {
